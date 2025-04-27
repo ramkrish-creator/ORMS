@@ -5,11 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Appointment Booking</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .time-slot-label {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+        input[name="time"] {
+            display: none;
+        }
+        input[name="time"]:checked + .time-slot-label {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Book Your Appointment</h1>
-        <form>
+        <form action="#" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             
@@ -18,35 +41,84 @@
             
             <label>Select Time Slot:</label>
             <div class="time-slots">
-                <!-- Time slots from 8:00 AM to 12:00 PM -->
-                <button type="button" value="08:00 AM">08:00 AM</button>
-                <button type="button" value="08:20 AM">08:20 AM</button>
-                <button type="button" value="08:40 AM">08:40 AM</button>
-                <button type="button" value="09:00 AM">09:00 AM</button>
-                <button type="button" value="09:20 AM">09:20 AM</button>
-                <button type="button" value="09:40 AM">09:40 AM</button>
-                <button type="button" value="10:00 AM">10:00 AM</button>
-                <button type="button" value="10:20 AM">10:20 AM</button>
-                <button type="button" value="10:40 AM">10:40 AM</button>
-                <button type="button" value="11:00 AM">11:00 AM</button>
-                <button type="button" value="11:20 AM">11:20 AM</button>
-                <button type="button" value="11:40 AM">11:40 AM</button>
-                <button type="button" value="12:00 PM">12:00 PM</button>
+                <!-- Time slots using radio buttons -->
+                <input type="radio" id="time1" name="time" value="08:00 AM" required>
+                <label class="time-slot-label" for="time1">08:00 AM</label>
 
-                <!-- Time slots from 5:00 PM to 9:00 PM -->
-                <button type="button" value="05:00 PM">05:00 PM</button>
-                <button type="button" value="05:20 PM">05:20 PM</button>
-                <button type="button" value="05:40 PM">05:40 PM</button>
-                <button type="button" value="06:00 PM">06:00 PM</button>
-                <button type="button" value="06:20 PM">06:20 PM</button>
-                <button type="button" value="06:40 PM">06:40 PM</button>
-                <button type="button" value="07:00 PM">07:00 PM</button>
-                <button type="button" value="07:20 PM">07:20 PM</button>
-                <button type="button" value="07:40 PM">07:40 PM</button>
-                <button type="button" value="08:00 PM">08:00 PM</button>
-                <button type="button" value="08:20 PM">08:20 PM</button>
-                <button type="button" value="08:40 PM">08:40 PM</button>
-                <button type="button" value="09:00 PM">09:00 PM</button>
+                <input type="radio" id="time2" name="time" value="08:20 AM">
+                <label class="time-slot-label" for="time2">08:20 AM</label>
+
+                <input type="radio" id="time3" name="time" value="08:40 AM">
+                <label class="time-slot-label" for="time3">08:40 AM</label>
+
+                <input type="radio" id="time4" name="time" value="09:00 AM">
+                <label class="time-slot-label" for="time4">09:00 AM</label>
+
+                <input type="radio" id="time5" name="time" value="09:20 AM">
+                <label class="time-slot-label" for="time5">09:20 AM</label>
+
+                <input type="radio" id="time6" name="time" value="09:40 AM">
+                <label class="time-slot-label" for="time6">09:40 AM</label>
+
+                <input type="radio" id="time7" name="time" value="10:00 AM">
+                <label class="time-slot-label" for="time7">10:00 AM</label>
+
+                <input type="radio" id="time8" name="time" value="10:20 AM">
+                <label class="time-slot-label" for="time8">10:20 AM</label>
+
+                <input type="radio" id="time9" name="time" value="10:40 AM">
+                <label class="time-slot-label" for="time9">10:40 AM</label>
+
+                <input type="radio" id="time10" name="time" value="11:00 AM">
+                <label class="time-slot-label" for="time10">11:00 AM</label>
+
+                <input type="radio" id="time11" name="time" value="11:20 AM">
+                <label class="time-slot-label" for="time11">11:20 AM</label>
+
+                <input type="radio" id="time12" name="time" value="11:40 AM">
+                <label class="time-slot-label" for="time12">11:40 AM</label>
+
+                <input type="radio" id="time13" name="time" value="12:00 PM">
+                <label class="time-slot-label" for="time13">12:00 PM</label>
+
+                <input type="radio" id="time14" name="time" value="05:00 PM">
+                <label class="time-slot-label" for="time14">05:00 PM</label>
+
+                <input type="radio" id="time15" name="time" value="05:20 PM">
+                <label class="time-slot-label" for="time15">05:20 PM</label>
+
+                <input type="radio" id="time16" name="time" value="05:40 PM">
+                <label class="time-slot-label" for="time16">05:40 PM</label>
+
+                <input type="radio" id="time17" name="time" value="06:00 PM">
+                <label class="time-slot-label" for="time17">06:00 PM</label>
+
+                <input type="radio" id="time18" name="time" value="06:20 PM">
+                <label class="time-slot-label" for="time18">06:20 PM</label>
+
+                <input type="radio" id="time19" name="time" value="06:40 PM">
+                <label class="time-slot-label" for="time19">06:40 PM</label>
+
+                <input type="radio" id="time20" name="time" value="07:00 PM">
+                <label class="time-slot-label" for="time20">07:00 PM</label>
+
+                <input type="radio" id="time21" name="time" value="07:20 PM">
+                <label class="time-slot-label" for="time21">07:20 PM</label>
+
+                <input type="radio" id="time22" name="time" value="07:40 PM">
+                <label class="time-slot-label" for="time22">07:40 PM</label>
+
+                <input type="radio" id="time23" name="time" value="08:00 PM">
+                <label class="time-slot-label" for="time23">08:00 PM</label>
+
+                <input type="radio" id="time24" name="time" value="08:20 PM">
+                <label class="time-slot-label" for="time24">08:20 PM</label>
+
+                <input type="radio" id="time25" name="time" value="08:40 PM">
+                <label class="time-slot-label" for="time25">08:40 PM</label>
+
+                <input type="radio" id="time26" name="time" value="09:00 PM">
+                <label class="time-slot-label" for="time26">09:00 PM</label>
             </div>
             
             <button type="submit">Book Appointment</button>
