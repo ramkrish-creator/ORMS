@@ -1,0 +1,151 @@
+<!-- doctor-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #eef6f7;
+    }
+    .navbar {
+      background-color: #2e7d32;
+    }
+    .navbar-brand, .navbar-text {
+      color: white !important;
+    }
+    .profile-card img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar px-4">
+  <a class="navbar-brand" href="#">ORMS - Doctor Panel</a>
+  <div class="ms-auto">
+    <span class="navbar-text me-3">Dr. A. Kumar</span>
+    <a href="doctor-login.html" class="btn btn-light btn-sm">Logout</a>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <div class="row g-4">
+    <!-- Profile -->
+    <div class="col-md-4">
+      <div class="card p-3 text-center profile-card">
+        <img src="https://via.placeholder.com/80" alt="Doctor">
+        <h5 class="mt-2">Dr. A. Kumar</h5>
+        <p>Cardiologist</p>
+        <p class="text-muted small">akumar@orms.com</p>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="col-md-8">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card p-3 text-center">
+            <h6>Today's Appointments</h6>
+            <p class="display-6">5</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">View Schedule</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card p-3 text-center">
+            <h6>Prescriptions Written</h6>
+            <p class="display-6">14</p>
+            <a href="#" class="btn btn-outline-success btn-sm">Review</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's Appointments Table -->
+  <div class="card p-4 mt-4">
+    <h5>Today's Appointments</h5>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Patient</th>
+          <th>Issue</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1:00 PM</td><td>Rajkumar</td><td>Chest Pain</td><td><span class="badge bg-warning">Pending</span></td></tr>
+        <tr><td>2:00 PM</td><td>Ram</td><td>Checkup</td><td><span class="badge bg-success">Done</span></td></tr>
+        <tr><td>3:30 PM</td><td>Raveena</td><td>Follow-up</td><td><span class="badge bg-info">Ongoing</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-between mt-4">
+    <a href="#" class="btn btn-primary">Write New Prescription</a>
+    <a href="#" class="btn btn-secondary">View All Patients</a>
+    <a href="#" class="btn btn-outline-dark">Weekly Summary</a>
+  </div>
+</div>
+<!-- Add this script at the bottom of your doctor.html file, just before </body> -->
+<!-- Update the script section at the bottom -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const doctorData = JSON.parse(sessionStorage.getItem('currentDoctor'));
+        
+        if (!doctorData) {
+            window.location.href = 'doctorlogin.html';
+            return;
+        }
+
+        // Update doctor info
+        document.querySelector('.navbar-text').textContent = doctorData.name;
+        
+        const profileCard = document.querySelector('.profile-card');
+        profileCard.querySelector('h5').textContent = doctorData.name;
+        profileCard.querySelector('p').textContent = doctorData.specialty;
+        profileCard.querySelector('p.text-muted').textContent = doctorData.email;
+
+        // Update appointments table
+        const tbody = document.querySelector('table tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+        
+        doctorData.appointments.forEach(appt => {
+            const statusClass = {
+                'Pending': 'bg-warning',
+                'Done': 'bg-success',
+                'Ongoing': 'bg-info'
+            }[appt.status];
+            
+            tbody.innerHTML += `
+                <tr>
+                    <td>${appt.time}</td>
+                    <td>${appt.patient}</td>
+                    <td>${appt.issue}</td>
+                    <td><span class="badge ${statusClass}">${appt.status}</span></td>
+                </tr>
+            `;
+        });
+
+        // Update logout button
+        document.querySelector('.btn-light').addEventListener('click', function(e) {
+            e.preventDefault();
+            sessionStorage.removeItem('currentDoctor');
+            window.location.href = 'doctorlogin.html';
+        });
+    });
+</script>
+
+</body>
+</html>
