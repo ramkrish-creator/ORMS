@@ -70,12 +70,51 @@
       background-color: #222d22;
       transition-duration: 0.4s;
     }
+    
+    /* Success Popup Styles */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 300px;
+    }
+    .success-icon {
+      color: #28a745;
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+    .popup-button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .popup-button:hover {
+      background-color: #218838;
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>Book Your Appointment</h1>
-    <form action="#" method="post">
+    <form id="appointmentForm" action="#" method="post">
       
       <!-- Doctor Selection -->
       <label for="doctor">Select Doctor:</label>
@@ -85,7 +124,9 @@
         <option value="Doctor 2">Doctor 2</option>
       </select>
 
-      <!-- Patient ID Field (Inserted via JavaScript) -->
+      <!-- Patient ID Field -->
+      <label for="patientId">Patient ID (>= 1001):</label>
+      <input type="number" id="patientId" name="patientId" required min="1001">
       
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required />
@@ -95,93 +136,97 @@
       
       <label>Select Time Slot:</label>
       <div class="time-slots">
-        <!-- Time slots using radio buttons -->
-        <!-- ... (keep the same time slot inputs as before) -->
-        <!-- For brevity, omitting the repeated radio/time input blocks from here -->
-        <!-- Copy your previous time inputs here if needed -->
-        
-        <!-- Example one for illustration -->
+        <!-- Time slots -->
         <input type="radio" id="time1" name="time" value="08:00 AM" required>
-                <label class="time-slot-label" for="time1">08:00 AM</label>
+        <label class="time-slot-label" for="time1">08:00 AM</label>
 
-                <input type="radio" id="time2" name="time" value="08:20 AM">
-                <label class="time-slot-label" for="time2">08:20 AM</label>
+        <input type="radio" id="time2" name="time" value="08:20 AM">
+        <label class="time-slot-label" for="time2">08:20 AM</label>
 
-                <input type="radio" id="time3" name="time" value="08:40 AM">
-                <label class="time-slot-label" for="time3">08:40 AM</label>
+        <input type="radio" id="time3" name="time" value="08:40 AM">
+        <label class="time-slot-label" for="time3">08:40 AM</label>
 
-                <input type="radio" id="time4" name="time" value="09:00 AM">
-                <label class="time-slot-label" for="time4">09:00 AM</label>
+        <input type="radio" id="time4" name="time" value="09:00 AM">
+        <label class="time-slot-label" for="time4">09:00 AM</label>
 
-                <input type="radio" id="time5" name="time" value="09:20 AM">
-                <label class="time-slot-label" for="time5">09:20 AM</label>
+        <input type="radio" id="time5" name="time" value="09:20 AM">
+        <label class="time-slot-label" for="time5">09:20 AM</label>
 
-                <input type="radio" id="time6" name="time" value="09:40 AM">
-                <label class="time-slot-label" for="time6">09:40 AM</label>
+        <input type="radio" id="time6" name="time" value="09:40 AM">
+        <label class="time-slot-label" for="time6">09:40 AM</label>
 
-                <input type="radio" id="time7" name="time" value="10:00 AM">
-                <label class="time-slot-label" for="time7">10:00 AM</label>
+        <input type="radio" id="time7" name="time" value="10:00 AM">
+        <label class="time-slot-label" for="time7">10:00 AM</label>
 
-                <input type="radio" id="time8" name="time" value="10:20 AM">
-                <label class="time-slot-label" for="time8">10:20 AM</label>
+        <input type="radio" id="time8" name="time" value="10:20 AM">
+        <label class="time-slot-label" for="time8">10:20 AM</label>
 
-                <input type="radio" id="time9" name="time" value="10:40 AM">
-                <label class="time-slot-label" for="time9">10:40 AM</label>
+        <input type="radio" id="time9" name="time" value="10:40 AM">
+        <label class="time-slot-label" for="time9">10:40 AM</label>
 
-                <input type="radio" id="time10" name="time" value="11:00 AM">
-                <label class="time-slot-label" for="time10">11:00 AM</label>
+        <input type="radio" id="time10" name="time" value="11:00 AM">
+        <label class="time-slot-label" for="time10">11:00 AM</label>
 
-                <input type="radio" id="time11" name="time" value="11:20 AM">
-                <label class="time-slot-label" for="time11">11:20 AM</label>
+        <input type="radio" id="time11" name="time" value="11:20 AM">
+        <label class="time-slot-label" for="time11">11:20 AM</label>
 
-                <input type="radio" id="time12" name="time" value="11:40 AM">
-                <label class="time-slot-label" for="time12">11:40 AM</label>
+        <input type="radio" id="time12" name="time" value="11:40 AM">
+        <label class="time-slot-label" for="time12">11:40 AM</label>
 
-                <input type="radio" id="time13" name="time" value="12:00 PM">
-                <label class="time-slot-label" for="time13">12:00 PM</label>
+        <input type="radio" id="time13" name="time" value="12:00 PM">
+        <label class="time-slot-label" for="time13">12:00 PM</label>
 
-                <input type="radio" id="time14" name="time" value="05:00 PM">
-                <label class="time-slot-label" for="time14">05:00 PM</label>
+        <input type="radio" id="time14" name="time" value="05:00 PM">
+        <label class="time-slot-label" for="time14">05:00 PM</label>
 
-                <input type="radio" id="time15" name="time" value="05:20 PM">
-                <label class="time-slot-label" for="time15">05:20 PM</label>
+        <input type="radio" id="time15" name="time" value="05:20 PM">
+        <label class="time-slot-label" for="time15">05:20 PM</label>
 
-                <input type="radio" id="time16" name="time" value="05:40 PM">
-                <label class="time-slot-label" for="time16">05:40 PM</label>
+        <input type="radio" id="time16" name="time" value="05:40 PM">
+        <label class="time-slot-label" for="time16">05:40 PM</label>
 
-                <input type="radio" id="time17" name="time" value="06:00 PM">
-                <label class="time-slot-label" for="time17">06:00 PM</label>
+        <input type="radio" id="time17" name="time" value="06:00 PM">
+        <label class="time-slot-label" for="time17">06:00 PM</label>
 
-                <input type="radio" id="time18" name="time" value="06:20 PM">
-                <label class="time-slot-label" for="time18">06:20 PM</label>
+        <input type="radio" id="time18" name="time" value="06:20 PM">
+        <label class="time-slot-label" for="time18">06:20 PM</label>
 
-                <input type="radio" id="time19" name="time" value="06:40 PM">
-                <label class="time-slot-label" for="time19">06:40 PM</label>
+        <input type="radio" id="time19" name="time" value="06:40 PM">
+        <label class="time-slot-label" for="time19">06:40 PM</label>
 
-                <input type="radio" id="time20" name="time" value="07:00 PM">
-                <label class="time-slot-label" for="time20">07:00 PM</label>
+        <input type="radio" id="time20" name="time" value="07:00 PM">
+        <label class="time-slot-label" for="time20">07:00 PM</label>
 
-                <input type="radio" id="time21" name="time" value="07:20 PM">
-                <label class="time-slot-label" for="time21">07:20 PM</label>
+        <input type="radio" id="time21" name="time" value="07:20 PM">
+        <label class="time-slot-label" for="time21">07:20 PM</label>
 
-                <input type="radio" id="time22" name="time" value="07:40 PM">
-                <label class="time-slot-label" for="time22">07:40 PM</label>
+        <input type="radio" id="time22" name="time" value="07:40 PM">
+        <label class="time-slot-label" for="time22">07:40 PM</label>
 
-                <input type="radio" id="time23" name="time" value="08:00 PM">
-                <label class="time-slot-label" for="time23">08:00 PM</label>
+        <input type="radio" id="time23" name="time" value="08:00 PM">
+        <label class="time-slot-label" for="time23">08:00 PM</label>
 
-                <input type="radio" id="time24" name="time" value="08:20 PM">
-                <label class="time-slot-label" for="time24">08:20 PM</label>
+        <input type="radio" id="time24" name="time" value="08:20 PM">
+        <label class="time-slot-label" for="time24">08:20 PM</label>
 
-                <input type="radio" id="time25" name="time" value="08:40 PM">
-                <label class="time-slot-label" for="time25">08:40 PM</label>
+        <input type="radio" id="time25" name="time" value="08:40 PM">
+        <label class="time-slot-label" for="time25">08:40 PM</label>
 
-                <input type="radio" id="time26" name="time" value="09:00 PM">
-                <label class="time-slot-label" for="time26">09:00 PM</label>
+        <input type="radio" id="time26" name="time" value="09:00 PM">
+        <label class="time-slot-label" for="time26">09:00 PM</label>
       </div>
       
       <button type="submit">Book Appointment</button>
     </form>
+  </div>
+
+  <!-- Success Popup -->
+  <div class="popup-overlay" id="successPopup">
+    <div class="popup-content">
+      <div class="success-icon">✓</div>
+      <h3>Appointment Booked!</h3>
+      <button class="popup-button" id="okButton">OK</button>
+    </div>
   </div>
 
   <script>
@@ -190,39 +235,29 @@
     const today = new Date().toISOString().split("T")[0];
     dateInput.setAttribute("min", today);
 
-    // Add Patient ID field
-    const form = document.querySelector("form");
-    const nameLabel = document.querySelector('label[for="name"]');
-
-    const patientIdLabel = document.createElement("label");
-    patientIdLabel.setAttribute("for", "patientId");
-    patientIdLabel.textContent = "Patient ID (>= 1001):";
-
-    const patientIdInput = document.createElement("input");
-    patientIdInput.setAttribute("type", "number");
-    patientIdInput.setAttribute("id", "patientId");
-    patientIdInput.setAttribute("name", "patientId");
-    patientIdInput.setAttribute("required", true);
-    patientIdInput.setAttribute("min", "1001");
-
-    const errorMsg = document.createElement("p");
-    errorMsg.style.color = "red";
-    errorMsg.style.display = "none";
-
-    form.insertBefore(patientIdLabel, nameLabel);
-    form.insertBefore(patientIdInput, nameLabel);
-    form.insertBefore(errorMsg, nameLabel);
+    // Form submission handling
+    const form = document.getElementById("appointmentForm");
+    const successPopup = document.getElementById("successPopup");
+    const okButton = document.getElementById("okButton");
 
     form.addEventListener("submit", function (event) {
-      const patientId = parseInt(patientIdInput.value);
+      event.preventDefault();
+      
+      // Validate form
+      const patientId = parseInt(document.getElementById("patientId").value);
       if (isNaN(patientId) || patientId < 1001) {
-        event.preventDefault();
-        errorMsg.textContent =
-          "Error: Patient ID must be a number greater than or equal to 1001.";
-        errorMsg.style.display = "block";
-      } else {
-        errorMsg.style.display = "none";
+        alert("Error: Patient ID must be a number greater than or equal to 1001.");
+        return;
       }
+      
+      // Show success popup
+      successPopup.style.display = "flex";
+    });
+
+    // OK button click handler
+    okButton.addEventListener("click", function() {
+      // Redirect to patient dashboard
+      window.location.href = "p_dash.html";
     });
   </script>
 </body>
