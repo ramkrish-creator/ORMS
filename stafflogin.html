@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://img.freepik.com/free-vector/gradient-pastel-color-background_23-2149360873.jpg?t=st=1745784427~exp=1745788027~hmac=3afe68ca84c8b16a0fa25fb57e9072e84c629d351e7daa82baf9492b906a463f&w=1380') no-repeat center center/cover;
+        }
+        .login-container {
+            width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .form-control {
+            height: 50px;
+        }
+        .btn-lg {
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="text-center mb-4">Login</h2>
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="userId" class="form-label">User ID</label>
+                <input type="text" class="form-control" id="userId" placeholder="Enter your User ID">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+            </div>
+            <div id="errorMessage" class="text-danger mb-3"></div>
+            <button type="submit" class="btn btn-primary btn-lg" style="background-color: #48107d; border-color: #8a2be2;">Login</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Define receptionist credentials
+            const receptionists = {
+                "R001": { 
+                    password: "priya@123", 
+                    name: "Priya Sharma",
+                    image: "https://randomuser.me/api/portraits/women/44.jpg"
+                },
+                "R002": { 
+                    password: "rahul@123", 
+                    name: "Rahul Verma",
+                    image: "https://randomuser.me/api/portraits/men/32.jpg"
+                },
+                "R003": { 
+                    password: "ananya@123", 
+                    name: "Ananya Patel",
+                    image: "https://randomuser.me/api/portraits/women/68.jpg"
+                }
+            };
+    
+            const userId = document.getElementById('userId').value.trim();
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('errorMessage');
+    
+            // Check credentials
+            if (receptionists[userId] && receptionists[userId].password === password) {
+                // Store receptionist data in session storage
+                sessionStorage.setItem('loggedInReceptionist', JSON.stringify({
+                    id: userId,
+                    name: receptionists[userId].name,
+                    image: receptionists[userId].image
+                }));
+                
+                // Redirect to dashboard
+                window.location.href = "final_receptionist.html";
+            } else {
+                errorElement.textContent = "Invalid credentials. Try R001/priya@123, R002/rahul@123, or R003/ananya@123";
+            }
+        });
+    </script>
+</body>
+</html>
