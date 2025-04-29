@@ -124,5 +124,47 @@
             <button type="submit">Book Appointment</button>
         </form>
     </div>
+<script>
+    // Set min attribute on date input to today's date
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    // Add a patient ID field
+    const form = document.querySelector('form');
+    const nameLabel = document.querySelector('label[for="name"]');
+    
+    const patientIdLabel = document.createElement('label');
+    patientIdLabel.setAttribute('for', 'patientId');
+    patientIdLabel.textContent = 'Patient ID (>= 1001):';
+
+    const patientIdInput = document.createElement('input');
+    patientIdInput.setAttribute('type', 'number');
+    patientIdInput.setAttribute('id', 'patientId');
+    patientIdInput.setAttribute('name', 'patientId');
+    patientIdInput.setAttribute('required', true);
+    patientIdInput.setAttribute('min', '1001');
+
+    const errorMsg = document.createElement('p');
+    errorMsg.style.color = 'red';
+    errorMsg.style.display = 'none';
+
+    form.insertBefore(patientIdLabel, nameLabel);
+    form.insertBefore(patientIdInput, nameLabel);
+    form.insertBefore(errorMsg, nameLabel);
+
+    form.addEventListener('submit', function(event) {
+        const patientId = parseInt(patientIdInput.value);
+
+        if (isNaN(patientId) || patientId < 1001) {
+            event.preventDefault();
+            errorMsg.textContent = 'Error: Patient ID must be a number greater than or equal to 1001.';
+            errorMsg.style.display = 'block';
+        } else {
+            errorMsg.style.display = 'none';
+        }
+    });
+</script>
+
 </body>
 </html>
